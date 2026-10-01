@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Runner Recreation</title>
+<style>
+@font-face { font-family: Geist; src: url(fonts/geist.woff2) format('woff2'); font-weight: 100 900; }
+@font-face { font-family: Figtree; src: url(fonts/figtree.woff2) format('woff2'); font-weight: 300 900; }
+@font-face { font-family: 'Open Sans'; src: url(fonts/opensans.woff2) format('woff2'); font-weight: 300 800; }
+@font-face { font-family: Inter; src: url(fonts/inter.woff2) format('woff2'); font-weight: 100 900; }
+:root { --fg: #e4e4e4; --teal: #5fe3d8; }
+html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #0d0d0d; }
+#stage { position: absolute; inset: 0; overflow: hidden; font-family: Geist, sans-serif; color: var(--fg);
+  background: radial-gradient(ellipse 680px 470px at 50% 50%, #181818 0%, #171717 35%, #0f0f0f 100%) #0f0f0f; }
+.layer { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+canvas.layer { pointer-events: none; }
+.abs { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; }
+.glow { text-shadow: 0 0 22px rgba(255,255,255,.10), 0 0 4px rgba(255,255,255,.15); }
+svg { overflow: visible; }
+
+/* Scene C */
+#lineC { white-space: nowrap; font-size: 265px; letter-spacing: -0.012em; color: #c4c6c6; line-height: 1; display: flex; align-items: center; transform-origin: 0 50%; }
+#lineC .w { display: inline-block; will-change: transform, filter, opacity; }
+#lineC #cB { width: 301px; height: 301px; margin-right: 19px; flex: none; }
+#lineC #cS0, #lineC #cS1 { overflow: hidden; }
+#lineC #cW0 { letter-spacing: .02em; }
+#lineC svg { width: 301px; height: 301px; display: block; }
+
+/* Scene D */
+.item { position: absolute; left: 0; top: 0; display: flex; align-items: center; gap: 31px; font-size: 53px; font-weight: 300; height: 62px; white-space: nowrap; transform-origin: 0 50%; letter-spacing: .02em; }
+.item .ic { width: 56px; height: 56px; flex: none; display: flex; align-items: center; justify-content: center; }
+.item .ic svg { width: 68px; height: 68px; flex: none; }
+
+/* Scene E */
+#box { position: absolute; border-radius: 30px; background: rgba(255,255,255,.018); box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.025); }
+#ptext { position: absolute; font-family: Figtree; font-weight: 350; font-size: 44px; line-height: 69px; white-space: pre; letter-spacing: -0.01em; }
+.caret { display: inline-block; width: 3px; height: 56px; margin-left: 2px; vertical-align: -12px; background: rgb(70,228,224); }
+#rowE { position: absolute; }
+#plus { position: absolute; font-size: 57px; font-weight: 200; color: rgb(96,98,101); transform: translateY(-50%); line-height: 1; }
+#runnerE { position: absolute; display: flex; align-items: center; gap: 17px; font-size: 41px; font-weight: 300; white-space: nowrap; }
+#send { position: absolute; width: 87px; height: 87px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+#sendGlow { position: absolute; width: 390px; height: 390px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle 195px, rgba(150,255,250,1) 0px, rgba(140,255,250,.9) 44px, rgba(110,255,250,.58) 61px, rgba(100,255,255,.33) 78px, rgba(100,255,255,.15) 100px, rgba(100,255,255,0) 130px); }
+#cursor { position: absolute; width: 211px; height: 253px; transform-origin: 0 0; filter: drop-shadow(0 18px 24px rgba(0,0,0,.55)); }
+
+/* Scene F/G */
+#hdr { position: absolute; display: flex; align-items: center; gap: 18px; font-size: 46px; white-space: nowrap; }
+.tline { position: absolute; font-family: Figtree; font-weight: 340; font-size: 47px; white-space: pre; color: #fff; }
+#here { font-size: 46.5px; margin-top: 6px; }
+#think { font-size: 45.5px; }
+#think { background: linear-gradient(90deg, #5a5a5a 0%, #5a5a5a 35%, #f2f2f2 50%, #5a5a5a 65%, #5a5a5a 100%);
+  background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: none; }
+#done { color: #6f6f6f; font-family: 'Open Sans'; font-size: 34px; }
+#done .chv { display: inline-block; width: 15px; height: 20px; margin-left: 58px; vertical-align: -2px; }
+#card { position: absolute; }
+#cardHdr { position: absolute; left: 0; top: 0; width: 1571px; height: 0; }
+#cardHdr > * { position: absolute; top: 0; transform: translateY(-50%); white-space: nowrap; }
+#cardHdr .cic { left: 11px; width: 42px; height: 41px; margin-top: -3px; }
+#cardHdr .ctl { left: 105px; font-size: 43px; color: #f0f0f0; }
+.pill { left: 330px; box-sizing: border-box; width: 141px; height: 70px; margin-top: 3px; display: flex; align-items: center; justify-content: center; font-size: 40px; color: #646464; border: 2px solid #222; border-radius: 20px; }
+#flash { position: absolute; inset: 0; pointer-events: none; opacity: 0; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <canvas id="gl" class="layer" width="1920" height="1080"></canvas>
+    <div id="iconB" class="abs" style="opacity:0"></div>
+  <div id="sceneC" class="layer" style="opacity:0"><div id="lineC" class="abs" style="text-shadow:0 0 6px rgba(255,255,255,.12),0 0 28px rgba(255,255,255,.30),0 0 80px rgba(255,255,255,.18)"></div></div>
+  <div id="sceneD" class="layer" style="opacity:0"></div>
+  <div id="sceneE" class="layer" style="opacity:0">
+    <div id="worldE" class="abs">
+      <div id="box"></div>
+      <div id="ptext"></div>
+      <div id="sendGlow" class="abs" style="opacity:0"></div>
+      <div id="rowE" class="abs" style="width:3000px;height:3000px">
+        <div id="plus">+</div>
+        <div id="runnerE"></div>
+        <div id="send"></div>
+      </div>
+    </div>
+  </div>
+  <div id="cursor" class="abs" style="opacity:0"></div>
+  <div id="sceneF" class="layer" style="opacity:0">
+    <div id="worldF" class="abs">
+      <div id="hdr" class="glow"></div>
+      <div id="think" class="tline">Thinking</div>
+      <div id="msg" class="tline glow"></div>
+      <div id="done" class="tline"></div>
+      <div id="here" class="tline glow"></div>
+      <div id="card"><div id="cardHdr"></div><canvas id="grid" width="1571" height="886" style="position:absolute;left:0;top:73px;border-radius:6px"></canvas></div>
+    </div>
+  </div>
+</div>
+<script src="comp.js"></script>
+</body>
+</html>

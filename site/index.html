@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>352 Frames, Nine Critics</title>
+<meta name="description" content="A replay of a Claude Code session that recreated a 14.7-second Runner promo frame for frame as a self-rendering web page, judged by three rounds of AI critics, with every prompt and what Claude did in response.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 8'%3E%3Cpath fill='%23d97757' d='M2 0h7v2h2v2H9v2H2V4H0V2h2z'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#prompts">Skip to the prompts</a>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <p class="topbar-title"><strong>Session replay</strong> <span>Claude Code recreating a Runner promo frame for frame</span></p>
+    <nav class="topbar-links" aria-label="Links">
+      <a class="pill pill-outline pill-sm" href="https://x.com/byshubh/status/2104974911425196258" rel="noopener"><span class="lg">Original </span>X post</a>
+      <a class="pill pill-outline pill-sm" href="https://github.com/EClinick/runner-video-recreation" rel="noopener"><span class="lg">Source on </span>GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" aria-label="The full Claude Code session">
+  <div class="term" id="term" aria-label="The Claude Code session">
+    <div class="term-viewport">
+    <div class="term-scroll" id="termScroll" tabindex="0" aria-label="Session transcript, scrollable">
+      <div class="term-head">
+        <svg class="clawd" viewBox="0 0 11 8" aria-hidden="true" shape-rendering="crispEdges">
+          <rect x="2" y="0" width="7" height="1"/>
+          <rect x="2" y="1" width="1" height="1"/><rect x="4" y="1" width="3" height="1"/><rect x="8" y="1" width="1" height="1"/>
+          <rect class="eye" x="3" y="1" width="1" height="1"/><rect class="eye" x="7" y="1" width="1" height="1"/>
+          <rect x="0" y="2" width="11" height="2"/>
+          <rect x="2" y="4" width="7" height="2"/>
+          <rect x="2" y="6" width="1" height="2"/><rect x="4" y="6" width="1" height="2"/><rect x="6" y="6" width="1" height="2"/><rect x="8" y="6" width="1" height="2"/>
+        </svg>
+        <div class="term-head-text">
+          <div><b class="hi">Claude Code</b> <span class="dim">v2.1.286</span></div>
+          <div class="dim">Opus 5.5 with high effort · Claude Team</div>
+          <div class="dim">~ · <span class="green">/rc</span></div>
+        </div>
+      </div>
+      <div class="term-note dim">Using Opus 5.5 (from .claude/settings.json) · /model</div>
+      <div class="term-log" id="termLog"></div>
+    </div>
+    <div class="term-fade" id="termFade" aria-hidden="true"><span>Scroll the session</span></div>
+    </div>
+    <div class="term-bottom">
+      <div class="term-effort dim"><span>●</span> high · /effort</div>
+      <div class="term-input">
+        <span class="chev">❯</span><span class="input-text" id="inputText"></span><span class="caret" aria-hidden="true"></span>
+      </div>
+      <div class="term-status dim">
+        <span>[Opus 5.5|high] user</span>
+        <span class="stat-group">
+          <span class="stat"><span class="stat-k">session</span> <span id="sElapsed">0:00:00</span></span>
+          <span class="stat"><span id="sTokens">0</span> <span class="stat-k">tokens</span></span>
+          <span class="stat"><span id="sCost">$0.00</span></span>
+          <span class="stat"><span id="sTools">0</span> <span class="stat-k">tool calls</span></span>
+        </span>
+      </div>
+      <div class="term-mode"><span class="amber">⏵⏵ auto mode on</span> <span class="dim">(shift+tab to cycle)</span></div>
+    </div>
+  </div>
+
+  <nav class="prompt-nav" aria-label="Jump to a prompt in the session">
+    <span class="prompt-nav-label">Jump to prompt</span>
+    <div class="pchips-row" id="promptChips"></div>
+  </nav>
+</section>
+
+<main>
+  <section class="intro" aria-labelledby="intro-h">
+    <h1 id="intro-h">352 frames, nine critics</h1>
+    <p>One Claude Code session took a 14.7-second promo for an AI agent app called Runner and rebuilt it frame for frame as a web page that draws itself, set to the exact original soundtrack. Three rounds of AI critics measured it against the original until the user called it done. Above is the whole session, rendered from its transcript. Below are the videos, the numbers, and every prompt the user typed with what Claude did in response.</p>
+  </section>
+
+  <section class="section" id="compare" aria-labelledby="compare-h">
+    <h2 id="compare-h">The original and the recreation</h2>
+    <div class="videos">
+      <figure class="vid">
+        <video id="vOriginal" src="media/original.mp4" poster="media/original.jpg" controls playsinline preload="metadata"></video>
+        <figcaption><strong>Original</strong> promo by <a href="https://x.com/byshubh/status/2104974911425196258" rel="noopener">@byshubh</a></figcaption>
+      </figure>
+      <figure class="vid">
+        <video id="vFinal" src="media/recreation.mp4" poster="media/recreation.jpg" controls playsinline preload="metadata"></video>
+        <figcaption><strong>Recreation</strong>, final render, SSIM 0.926</figcaption>
+      </figure>
+    </div>
+    <div class="sync-row">
+      <button type="button" class="pill pill-dark" id="syncPlay">Play both from the start</button>
+      <span class="sync-hint">Both use the same mp3, so the original plays muted.</span>
+    </div>
+
+    <figure class="vid vid-wide">
+      <video src="media/side-by-side.mp4" poster="media/side-by-side.jpg" controls playsinline preload="metadata"></video>
+      <figcaption><strong>Side by side</strong>, the comparison video Claude rendered at the end of the session</figcaption>
+    </figure>
+
+    <div class="card chart-card">
+      <h3>Critic scores by round</h3>
+      <p class="card-dek">Nine Opus 5.5 critics, three per round, each owning one overlapping slice of the video and scoring it out of 10. Every round used fresh critics on the latest render.</p>
+      <div class="chart" id="scoreChart"></div>
+      <details class="disclose">
+        <summary>Show scores as a table</summary>
+        <div class="table-scroll"><table id="scoreTable"></table></div>
+      </details>
+    </div>
+
+    <div class="card chart-card">
+      <h3>Similarity to the original</h3>
+      <p class="card-dek">Mean SSIM over all 352 frames after each scored render, where 1.0 is identical. Claude's <code>score.sh</code> also printed SSIM per second, which is how it caught a regression in the click section.</p>
+      <div class="chart" id="ssimChart"></div>
+    </div>
+  </section>
+
+  <section class="section" id="numbers" aria-labelledby="numbers-h">
+    <h2 id="numbers-h">By the numbers</h2>
+    <div class="kpis" id="kpiMain"></div>
+    <div class="kpis kpis-quiet" id="kpiQuiet"></div>
+    <details class="disclose breakdown">
+      <summary>Full breakdown: tool calls, renders, tokens and pricing</summary>
+      <div class="breakdown-body">
+        <div class="bd-block">
+          <h3>Tool calls</h3>
+          <p class="card-dek">Claude wrote the two source files once with Write, then changed them through Python patch scripts in Bash that assert each target string appears exactly once.</p>
+          <div id="toolBars"></div>
+        </div>
+        <div class="bd-block">
+          <h3>Full renders</h3>
+          <p class="card-dek">Renders of all 352 frames. Partial renders of a few seconds, used to check single fixes, are not listed.</p>
+          <ol class="renders" id="renderList"></ol>
+        </div>
+        <div class="bd-block">
+          <h3>Tokens and estimated cost by agent</h3>
+          <p class="card-dek">Usage is summed once per API response. The transcript repeats each response once per content block, so entries are deduplicated by message id first.</p>
+          <div class="table-scroll"><table class="num-table" id="tokenTable"></table></div>
+        </div>
+        <div class="bd-block">
+          <h3>Pricing used for the estimate</h3>
+          <p class="card-dek" id="pricingSource"></p>
+          <div class="table-scroll"><table class="num-table" id="pricingTable"></table></div>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <section class="section" id="prompts" aria-labelledby="prompts-h">
+    <h2 id="prompts-h">Every prompt, and what Claude did</h2>
+    <p class="section-dek">Prompts are verbatim, typos included. Times are measured from the first prompt. Click a dot on the strip to jump to that prompt.</p>
+    <div class="strip" id="strip" aria-label="Session overview"></div>
+    <ol class="cards" id="turns"></ol>
+  </section>
+
+  <section class="section" id="takeaways" aria-labelledby="takeaways-h">
+    <h2 id="takeaways-h">What the prompting shows</h2>
+    <div class="takeaways" id="takeawayList"></div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p id="footSnapshot"></p>
+  <p>Built from the session's JSONL transcript and its nine critic transcripts by <code>tools/build_site_data.py</code>, which writes <code>data.json</code>. The replay stops before the prompt that asked for this site. Home paths, emails, keys, internal names and system instructions were scrubbed. Costs are estimates at Anthropic API list prices (see the full breakdown). The original promo is by <a href="https://x.com/byshubh/status/2104974911425196258" rel="noopener">@byshubh</a>, and its soundtrack is used unchanged in the recreation.</p>
+</footer>
+
+<script src="session.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
