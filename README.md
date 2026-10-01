@@ -1,7 +1,8 @@
 # Runner promo recreation
 
 A frame-accurate recreation of a 14.7s product promo for an AI agent app called Runner, built by Claude Code (Opus 5.5).
-The original promo is by [@byshubh](https://x.com/byshubh/status/2104974911425196258); this repo only contains the recreation code and the session replay site.
+The original promo is by [@byshubh](https://x.com/byshubh/status/2104974911425196258).
+The reference clip and its audio are included in `ref/` so the recreation can be rendered and scored from a fresh clone; all rights to them belong to the original creator.
 
 Live session replay: see `site/` (published via ChatGPT sites).
 
@@ -20,7 +21,7 @@ Every value (positions, scales, colours, timings) comes from measurements of the
 
 ## Render it yourself
 
-Put the reference clip and its audio at `ref/video.mp4` and `ref/audio.mp3`, then:
+The reference clip and audio are already in `ref/`, so just run:
 
 ```
 npm install

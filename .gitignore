@@ -3,7 +3,5 @@ node_modules/
 .DS_Store
 # render intermediates and critic scratch
 out/
-# source clip and audio (third-party; place your own copies here to render)
-ref/
 scratch_onsets.py
 tools/scrub_terms.local.txt
